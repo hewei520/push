@@ -16,9 +16,4 @@ class Index extends BaseController
         $jpush = new Jpush();
         var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
     }
-
-    public function hello($name = 'ThinkPHP6')
-    {
-        return 'hello,' . $name;
-    }
 }
