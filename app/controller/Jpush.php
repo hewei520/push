@@ -9,10 +9,12 @@ class Jpush extends BaseController
 {
     public function push()
     {
-        $regId = ['100d855909f5342e530'];
-        var_dump(JpushStatic::push($regId,[JpushStatic::PLATFORM_ANDROID],"欢迎来到犀鸟公考","犀鸟通知"));
+//        $regId = ['100d855909f5342e530'];
+//        var_dump(JpushStatic::push($regId,[JpushStatic::PLATFORM_ANDROID],"欢迎来到犀鸟公考","犀鸟通知"));
+//
+//        $jpush = new JpushLib();
+//        var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
 
-        $jpush = new JpushLib();
-        var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
+        return response(["list"=>[]],200,"");
     }
 }
