@@ -17,7 +17,11 @@ return [
     // 多语言header变量
     'header_var'      => 'think-lang',
     // 扩展语言包
-    'extend_list'     => [],
+    'extend_list'     => [
+        'zh-cn'    => [
+            app()->getBasePath() . 'lang\zh-cn\jpush.php',
+        ],
+    ],
     // Accept-Language转义为对应语言包名称
     'accept_language' => [
         'zh-hans-cn' => 'zh-cn',
