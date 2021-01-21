@@ -2,21 +2,32 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\lib\jpush\Jpush as JpushLib;
-use app\lib\jpush\JpushStatic;
-use think\facade\Log;
+use app\model\jpush\JpushRecord;
+use app\StatusCode;
 
 class Jpush extends BaseController
 {
     public function push()
     {
-//        $regId = ['100d855909f5342e530'];
-//        var_dump(JpushStatic::push($regId,[JpushStatic::PLATFORM_ANDROID],"欢迎来到犀鸟公考","犀鸟通知"));
-//
-//        $jpush = new JpushLib();
-//        var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
-        print_r(lang("success"));
-//        return response(["msg" => lang("success")],200);
-        Log::info("success OK!!!");
+        if (!$this->request->isPost()){
+            return returnErrorJson(StatusCode::ERROR,lang("notIsPost"));
+        }
+
+        $post = $this->request->post();
+
+        return returnSuccessJson($post);
+        $jr = new JpushRecord();
+        $jr->save([
+            "platform"          => json_encode([JpushRecord::PLATFORM_IOS]),
+            "type"              => JpushRecord::TYPE_REGISTRATION,
+            "status"            => JpushRecord::STATUS_WAIT,
+            "registration_ids"  => json_encode(["dfjodjglj5","kgjlghh4563"]),
+            "alert"             => "测试通知"
+        ]);
+        sleep(2);
+        JpushRecord::update(["status" => JpushRecord::STATUS_SENDING],["id" => $jr->id]);
+
+        JpushRecord::destroy($jr->id);
+        return returnErrorJson(500,lang("error"),$jr->select()->toArray());
     }
 }
