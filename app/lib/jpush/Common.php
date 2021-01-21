@@ -21,6 +21,7 @@ class Common
 {
     const PLATFORM_ANDROID  = "android";
     const PLATFORM_IOS      = "ios";
+    const PLATFOEM_WINPHONE = "winphone";
 
     protected static $appKey = "";
     protected static $secret = "";
