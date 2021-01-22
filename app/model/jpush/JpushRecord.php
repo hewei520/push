@@ -27,4 +27,11 @@ class JpushRecord extends CommonModel
     const STATUS_FAIL       = "fail";       // 发送失败
     const STATUS_SENDING    = "sending";    // 发送中
 
+    public static function platformList(){
+        return [self::PLATFORM_IOS, self::PLATFORM_ANDROID];
+    }
+
+    public static function typeList(){
+        return [self::TYPE_ALIAS, self::TYPE_REGISTRATION];
+    }
 }

@@ -10,9 +10,6 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::post('jpush_push', 'jpush/push')
-    ->validate([
-        "platform",
-        "type",
-        ""
-    ]);
+Route::post('jpush_push', 'jpush/push');
+Route::get('jpush_query', 'jpush/query');
+Route::post('callback', 'jpush/callback');

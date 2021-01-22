@@ -8,7 +8,7 @@ use JPush\Client;
 use think\facade\Env;
 use think\facade\Log;
 
-define("JPUSH_LOG_PATH", APP_PATH."/runtime/log/jpush");
+define("JPUSH_LOG_PATH", app()->getRootPath()."runtime/log/jpush");
 
 /**
  * @file Common
@@ -53,6 +53,10 @@ class Common
         if (!empty($cid)) {
             self::$jpush->setCid($cid);
         }
+    }
+
+    protected static function addAlias($alias){
+        self::$jpush->addAlias($alias);
     }
 
     protected static function addRegistrationId($regID = [])

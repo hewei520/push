@@ -14,4 +14,5 @@ return [
     "notIsPost"     => "非post请求",
     "notIsPut"      => "非put请求",
     "notIsDelete"   => "非delete请求",
+    "codeError"     => "code不合法",
 ];

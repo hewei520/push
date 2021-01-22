@@ -18,10 +18,18 @@ use think\facade\Log;
  */
 class JpushStatic extends Common
 {
-    public static function push($regId = [], $platform = [], $alert = "", $title = "", $extras = [], $builderID = 0,$badge = 0)
+    public static function push($regId = [], $alias = [], $platform = [], $alert = "", $title = "", $extras = [], $builderID = 0,$badge = 0)
     {
         self::init();
-        self::addRegistrationId($regId);
+
+        if (!empty($alias)){
+            self::addAlias($alias);
+        }
+
+        if (!empty($regId)) {
+            self::addRegistrationId($regId);
+        }
+
         if (in_array(self::PLATFORM_ANDROID, $platform)){
             self::androidNotification($alert, $title, $builderID, $extras);
         }
