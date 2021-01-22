@@ -5,6 +5,7 @@
 return [
     // 指令定义
     'commands' => [
-        "jpush_push"    => "app\command\jpush\push"
+        "jpush_push"    => "app\command\jpush\Push",
+        "jpush"         => "app\command\jpush\Jpush"
     ],
 ];
