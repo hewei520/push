@@ -10,4 +10,6 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::get('hello/:name', 'index/hello');
+Route::post('jpush_push', 'jpush/push');
+Route::get('jpush_query', 'jpush/query');
+Route::post('callback', 'jpush/callback');

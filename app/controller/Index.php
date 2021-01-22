@@ -2,7 +2,6 @@
 namespace app\controller;
 
 use app\BaseController;
-use app\lib\jpush\Common;
 use app\lib\jpush\Jpush;
 use app\lib\jpush\JpushStatic;
 
@@ -15,10 +14,5 @@ class Index extends BaseController
 
         $jpush = new Jpush();
         var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
-    }
-
-    public function hello($name = 'ThinkPHP6')
-    {
-        return 'hello,' . $name;
     }
 }

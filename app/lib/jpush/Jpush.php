@@ -29,6 +29,12 @@ class Jpush extends Common
        return $this;
     }
 
+    public function aliasAdd($alias = [])
+    {
+        self::addAlias($alias);
+        return $this;
+    }
+
     public function registrationIdAdd($regID = [])
     {
         self::addRegistrationId($regID);
