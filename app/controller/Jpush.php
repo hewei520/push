@@ -4,6 +4,7 @@ namespace app\controller;
 use app\BaseController;
 use app\model\jpush\JpushRecord;
 use app\StatusCode;
+use hw\Post;
 use think\facade\Log;
 
 class Jpush extends BaseController
