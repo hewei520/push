@@ -14,6 +14,7 @@ use think\console\Command;
 use think\console\Input;
 use think\console\Output;
 use think\facade\Log;
+use hw\Post;
 
 class Push extends Command
 {
@@ -58,7 +59,7 @@ class Push extends Command
 
             // 如果有回调地址，通知回调地址
             if (!empty($list["callback_url"])){
-                postUrl(
+                Post::postUrl(
                     $list["callback_url"],
                     [
                         "code"              => $list["code"],
