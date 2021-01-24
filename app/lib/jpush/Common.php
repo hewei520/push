@@ -25,6 +25,7 @@ class Common
 
     protected static $appKey = "";
     protected static $secret = "";
+    protected static $production = false; // 发送环境，默认开发，正式环境切换成true
     protected static $jpush = null;
     protected static $platform = [];
 
@@ -37,7 +38,7 @@ class Common
     {
         self::$appKey = Env::get("JPUSH.appKey");
         self::$secret = Env::get("JPUSH.secret");
-
+        self::$production = (bool)Env::get("JPUSH.production", false);
         $client = new Client(self::$appKey, self::$secret, JPUSH_LOG_PATH);
 
         $ok = $client != null ? "success" : "fail";
@@ -45,8 +46,6 @@ class Common
 
         self::$jpush = $client->push();
     }
-
-
 
     protected static function setCid($cid = "")
     {
@@ -107,4 +106,8 @@ class Common
         return false;
     }
 
+    public static function setOptions($sendno=null, $time_to_live=null, $override_msg_id=null, $big_push_duration=null)
+    {
+        self::$jpush->setOptions($sendno, $time_to_live, $override_msg_id, self::$production, $big_push_duration);
+    }
 }
