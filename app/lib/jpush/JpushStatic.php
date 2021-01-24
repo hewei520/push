@@ -37,7 +37,7 @@ class JpushStatic extends Common
         if (in_array(self::PLATFORM_IOS, $platform)){
             self::iosNotification($alert, $title, $badge, $extras);
         }
-
+        self::setOptions();
         return self::send();
     }
 }

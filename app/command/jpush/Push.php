@@ -10,6 +10,7 @@ namespace app\command\jpush;
 
 use app\lib\jpush\JpushStatic;
 use app\model\jpush\JpushRecord;
+use JPush\Exceptions\APIRequestException;
 use think\console\Command;
 use think\console\Input;
 use think\console\Output;
@@ -38,19 +39,26 @@ class Push extends Command
             // 修改状态为发送中
             JpushRecord::update(["status" => JpushRecord::STATUS_SENDING], ["id" => $list["id"]]);
 
-            $ok = JpushStatic::push(
-                $this->registrationIdsCarding($list["registration_ids"]),
-                $this->aliasCarding($list["alias"]),
-                $this->platformCarding($list["platform"]),
-                $list["alert"],
-                $list["title"],
-                $list["extras"]
-            );
+            try{
+                $ok = JpushStatic::push(
+                    $this->registrationIdsCarding($list["registration_ids"]),
+                    $this->aliasCarding($list["alias"]),
+                    $this->platformCarding($list["platform"]),
+                    $list["alert"],
+                    $list["title"],
+                    $list["extras"]
+                );
+            }catch (APIRequestException $e){
+                Log::info("jpush_push msg:push fail! == " . $e->getMessage() . " id=" . $list["id"]);
+                // 修改状态为发送失败
+                JpushRecord::update(["status" => JpushRecord::STATUS_FAIL, "msg" => $e->getMessage()], ["id" => $list["id"]]);
+                continue;
+            }
 
             if (!$ok) {
                 Log::info("jpush_push msg:push fail! id=" . $list["id"]);
                 // 修改状态为发送失败
-                JpushRecord::update(["status" => JpushRecord::STATUS_FAIL], ["id" => $list["id"]]);
+                JpushRecord::update(["status" => JpushRecord::STATUS_FAIL, "msg" => "发送到极光失败"], ["id" => $list["id"]]);
                 continue;
             }
             // 修改状态为发送成功
