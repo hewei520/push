@@ -24,7 +24,8 @@
         "topthink/framework": "^6.0.0",
         "topthink/think-orm": "^2.0",
         "jpush/jpush": "*",
-        "hw/post": ">=1.0.1"
+        "hw/post": ">=1.0.1",
+        "hw/rpc": ">=1.0.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.2",

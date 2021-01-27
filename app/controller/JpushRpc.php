@@ -1,32 +1,22 @@
 <?php
 namespace app\controller;
 
-use app\BaseController;
 use app\model\jpush\JpushRecord;
 use app\StatusCode;
-use think\App;
-use think\facade\Log;
+use hw\Rpc;
 
-class Jpush extends BaseController
+class JpushRpc extends Rpc
 {
 
-    public function __construct(App $app)
-    {
-        parent::__construct($app);
-    }
+    public function index(){
 
+    }
     /**
      * 发送推送
      * @return \think\response\Json
      */
-    public function push()
+    public function push($post = [])
     {
-        if (!$this->request->isPost()){
-            return returnErrorJson(StatusCode::ERROR,lang("notIsPost"));
-        }
-
-        $post = $this->request->post();
-
         $rule =   [
             'platform'  => 'require',
             'type'      => 'require|in:' . JpushRecord::TYPE_ALIAS . ',' . JpushRecord::TYPE_REGISTRATION,
@@ -85,13 +75,7 @@ class Jpush extends BaseController
     /**
      * 查询发送结果
      */
-    public function query(){
-        if (!$this->request->isGet()){
-            return returnErrorJson(StatusCode::ERROR, lang("notIsGet"));
-        }
-
-        $get = $this->request->get();
-
+    public function query($get = []){
         $rule =   [
             'code'  => 'require',
         ];
@@ -114,9 +98,5 @@ class Jpush extends BaseController
         }
 
         return returnSuccessJson($info);
-    }
-
-    public function callback(){
-        Log::info("callback params=" . json_encode($this->request->post()));
     }
 }
