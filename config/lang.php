@@ -18,8 +18,8 @@ return [
     'header_var'      => 'think-lang',
     // 扩展语言包
     'extend_list'     => [
-        'zh-cn'    => [
-            app()->getBasePath() . 'lang\zh-cn\jpush.php',
+	    'zh-cn'    => [
+            app()->getBasePath() . 'lang/zh-cn/jpush.php',
         ],
     ],
     // Accept-Language转义为对应语言包名称

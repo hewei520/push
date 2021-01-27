@@ -9,6 +9,7 @@ class Index extends BaseController
 {
     public function index()
     {
+	    var_dump(app()->getBasePath());die;
         $service = new \Yar_Client("http://120.24.215.14:4010/jpush_rpc");
         $service->SetOpt(YAR_OPT_PACKAGER,'php');
         return $service->query(["code" => "gf23d1g32fd1g"]);
