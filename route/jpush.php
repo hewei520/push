@@ -14,4 +14,4 @@ Route::post('jpush_push', 'jpush/push');
 Route::get('jpush_query', 'jpush/query');
 Route::post('callback', 'jpush/callback');
 
-Route::post('jpush_rpc', 'jpushRpc/index');
+Route::get('jpush_rpc', 'jpushRpc/index');

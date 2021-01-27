@@ -9,10 +9,8 @@ class Index extends BaseController
 {
     public function index()
     {
-        $regId = ['100d855909f5342e530'];
-        var_dump(JpushStatic::push($regId,[JpushStatic::PLATFORM_ANDROID],"欢迎来到犀鸟公考","犀鸟通知"));
-
-        $jpush = new Jpush();
-        var_dump($jpush->registrationIdAdd($regId)->notificationAndroid("欢迎来到犀鸟公考2","犀鸟通知")->push());
+        $service = new \Yar_Client("http://120.24.215.14:4010/jpush_rpc");
+        $service->SetOpt(YAR_OPT_PACKAGER,'php');
+        return $service->query(["code" => "gf23d1g32fd1g"]);
     }
 }
